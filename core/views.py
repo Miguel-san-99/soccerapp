@@ -1,0 +1,29 @@
+from django.shortcuts import render, get_object_or_404
+from .models import Torneo, Competencia, Jornada
+
+# Create your views here.
+
+def home(request):
+    return render(request, 'index.html')
+
+def competencia(request, competencia_id, torneo_id):
+    competencia = get_object_or_404(Competencia, id=competencia_id)
+    torneos = competencia.torneos.all()
+    if torneo_id:
+        torneo_actual = get_object_or_404(Torneo, id=torneo_id)
+    else:
+        torneo_actual = torneos.order_by('-id').first()
+    tabla = torneo_actual.calcular_tabla()
+    jornadas = torneo_actual.jornadas.all()
+    context = {'competencia': competencia, 'torneos': torneos, 'torneo_actual': torneo_actual, 'tabla': tabla, 'jornadas': jornadas}
+    return render(request, 'competencia.html', context)
+
+def tabla_partidos_htmx(request, jornada_id):
+    jornada = get_object_or_404(Jornada, id=jornada_id)
+    partidos = jornada.partidos.all()
+    context = {'partidos':partidos, 'jornada':jornada}
+    return render(request, 'partials/tabla_partidos.html', context)
+
+
+def nosotros(request):
+    return render(request, 'nosotros.html')

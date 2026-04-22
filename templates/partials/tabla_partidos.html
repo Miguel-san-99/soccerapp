@@ -1,0 +1,17 @@
+<div id="tabla-partidos-container" class="table-responsive">
+    <table class="table table-hover caption-top table align-middle">
+        <caption class="table-light">{{ jornada.fecha }}</caption>
+        <tbody>
+            {% for partido in partidos %}
+            <tr>
+                <td class="text-end ">{{partido.equipo_local}}</td>
+                <td class="text-center">
+                    {{partido.fecha.time}}
+                    <h5><strong>{{partido.goles_local}} - {{partido.goles_visita}}</strong></h5>
+                </td>
+                <td>{{partido.equipo_visita}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>

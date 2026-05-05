@@ -1,5 +1,65 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content %}
-<h1>Nosotros</h1>
+<div class="container">
+    <div class="row">
+        <div class="my-5" id="titulo-nosotros">
+            <h1>Derbia Sport Club</h1>
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'img/panoramica2.jpg' %}" class="img-fluid"
+                alt="Imagen panoramica del complejo deportivo derbia sport club">
+        </div>
+        <div class="col-md-8" style="text-align: justify;">
+            <h2>Nosotros somos</h2>
+            <p>
+                Complejo deportivo, social y gastronómico de GDL. Vamos haciendo deporte en un buen ambiente! Que lo más
+                importante sea la educación y el aprendizaje.
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="card-group my-3">
+            <div class="card">
+                <img src="{% static 'img/futbol-card.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Futbol</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This content is a little bit longer.</p>
+                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="{% static 'img/softball-card.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Softball</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This card has even longer content than the first to show that equal height
+                        action.</p>
+                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+            <div class="card">
+                <img src="{% static 'img/snacks-card.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">Snacks</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to
+                        additional content. This card has even longer content than the first to show that equal height
+                        action.</p>
+                    <p class="card-text"><small class="text-body-secondary">Last updated 3 mins ago</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="my-3">
+            <h2>¿Cómo llegar?</h2>
+        </div>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2218.896779159739!2d-103.43717388590238!3d20.72140117156233!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8428af1d53b8240d%3A0xf8718b13c1cf6d40!2sDerbia%20Sport%20club!5e0!3m2!1ses!2smx!4v1777939671635!5m2!1ses!2smx"
+            width="800" height="600" style="border:0;" allowfullscreen="" loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+    </div>
+</div>
 {% endblock content %}

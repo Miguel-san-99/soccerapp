@@ -3,77 +3,18 @@
 <div class="container">
     <div class="row">
         <div class="col-12 col-md-2">
-            <h2>{{ competencia.nombre }}</h2>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
-                    {{ torneo_actual.nombre }}
-                </button>
-                <ul class="dropdown-menu">
-                    {% for torneo in torneos %}
-                    <li>
-                        <a class="dropdown-item {% if torneo.id == torneo_actual.id %}active{% endif %}"
-                            href="{% url 'competencia' competencia.id torneo.id %}">
-                            {{ torneo.nombre }}
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
-        <div class="col-12 col-md-10">
-            <div class="row">
-                <h1>Tabla de posiciones</h1>
-                <div class="table-responsive">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>POSICION/EQUIPO</th>
-                                <th>PJ</th>
-                                <th>PG</th>
-                                <th>PE</th>
-                                <th>PP</th>
-                                <th>GF</th>
-                                <th>GC</th>
-                                <th>DG</th>
-                                <th>Puntos</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for equipo in tabla %}
-                            <tr>
-                                <td>{{forloop.counter}} - {{equipo.equipo.nombre}}</td>
-                                <td>{{equipo.partidos_jugados}}</td>
-                                <td>{{equipo.partidos_ganados}}</td>
-                                <td>{{equipo.partidos_empatados}}</td>
-                                <td>{{equipo.partidos_perdidos}}</td>
-                                <td>{{equipo.goles_favor}}</td>
-                                <td>{{equipo.goles_contra}}</td>
-                                <td>{{equipo.diferencia_goles}}</td>
-                                <td><strong>{{equipo.puntos}}</strong></td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-9">
-                    <h1>Jornadas</h1>
-                </div>
-                <div class="col-md-3">
-                    <button id="jornada-nombre" class="btn btn-secondary dropdown-toggle" type="button"
-                        data-bs-toggle="dropdown">
-                        jornada
+            <h1>{{ competencia.nombre }}</h1>
+            <div class="row mb-3">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                        {{ torneo_actual.nombre }}
                     </button>
                     <ul class="dropdown-menu">
-                        {% for jornada in jornadas %}
+                        {% for torneo in torneos %}
                         <li>
-                            <a class="dropdown-item"
-                                hx-get="{% url 'tabla_partidos_htmx' jornada.id %}"
-                                hx-target="#tabla-partidos-container"
-                                hx-swap="outerHTML"
-                                hx-on="click: document.getElementById('jornada-nombre').innerText=this.innerText">
-                                {{ jornada.nombre }}
+                            <a class="dropdown-item {% if torneo.id == torneo_actual.id %}active{% endif %}"
+                                href="{% url 'competencia' competencia.id torneo.id %}">
+                                {{ torneo.nombre }}
                             </a>
                         </li>
                         {% endfor %}
@@ -81,8 +22,167 @@
                 </div>
             </div>
             <div class="row">
-                <div id="tabla-partidos-container" class="table-responsive">
-                    {% include 'partials/tabla_partidos.html' %}
+                <div id="list-example" class="list-group">
+                    <a class="list-group-item list-group-item-action" href="#tabla-posiciones">Tabla de posiciones</a>
+                    <a class="list-group-item list-group-item-action" href="#jornadas">Jornadas</a>
+                    <a class="list-group-item list-group-item-action" href="#estadisticas">Estadisticas</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-10">
+            <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-smooth-scroll="true" class="scrollspy-example" tabindex="0">
+                <div class="row" id="tabla-posiciones">
+                    <h2>Tabla de posiciones</h2>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>POSICION/EQUIPO</th>
+                                    <th>PJ</th>
+                                    <th>PG</th>
+                                    <th>PE</th>
+                                    <th>PP</th>
+                                    <th>GF</th>
+                                    <th>GC</th>
+                                    <th>DG</th>
+                                    <th>Puntos</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for equipo in tabla %}
+                                <tr>
+                                    <td>{{forloop.counter}} - {{equipo.equipo.nombre}}</td>
+                                    <td>{{equipo.partidos_jugados}}</td>
+                                    <td>{{equipo.partidos_ganados}}</td>
+                                    <td>{{equipo.partidos_empatados}}</td>
+                                    <td>{{equipo.partidos_perdidos}}</td>
+                                    <td>{{equipo.goles_favor}}</td>
+                                    <td>{{equipo.goles_contra}}</td>
+                                    <td>{{equipo.diferencia_goles}}</td>
+                                    <td><strong>{{equipo.puntos}}</strong></td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="row" id="jornadas">
+                    <div class="col-md-9">
+                        <h2>Jornadas</h2>
+                    </div>
+                    <div class="col-md-3">
+                        <button id="jornada-nombre" class="btn btn-secondary dropdown-toggle" type="button"
+                            data-bs-toggle="dropdown">
+                            jornada
+                        </button>
+                        <ul class="dropdown-menu">
+                            {% for jornada in jornadas %}
+                            <li>
+                                <a class="dropdown-item" hx-get="{% url 'tabla_partidos_htmx' jornada.id %}"
+                                    hx-target="#tabla-partidos-container" hx-swap="outerHTML"
+                                    hx-on="click: document.getElementById('jornada-nombre').innerText=this.innerText">
+                                    {{ jornada.nombre }}
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div id="tabla-partidos-container" class="table-responsive">
+                        {% include 'partials/tabla_partidos.html' %}
+                    </div>
+                </div>
+                <div class="row" id="estadisticas">
+                    <div>
+                        <h2>Estadisticas</h2>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 mb-4">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    <strong>Más Victorias</strong>
+                                </div>
+                                <ul class="list-group list-group-numbered">
+                                    {% for equipo in lista_victorias %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="ms-2 me-auto">
+                                            {{equipo.equipo.nombre}}
+                                        </div>
+                                        <span class="badge text-bg-primary rounded-pill">{{equipo.partidos_ganados}}</span>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 mb-4">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    <strong>Más Empates</strong>
+                                </div>
+                                <ul class="list-group list-group-numbered">
+                                    {% for equipo in lista_empatados %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="ms-2 me-auto">
+                                            {{equipo.equipo.nombre}}
+                                        </div>
+                                        <span
+                                            class="badge text-bg-primary rounded-pill">{{equipo.partidos_empatados}}</span>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 mb-4">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    <strong>Más Derrotas</strong>
+                                </div>
+                                <ul class="list-group list-group-numbered">
+                                    {% for equipo in lista_perdidos %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="ms-2 me-auto">
+                                            {{equipo.equipo.nombre}}
+                                        </div>
+                                        <span class="badge text-bg-primary rounded-pill">{{equipo.partidos_perdidos}}</span>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 mb-4">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    <strong>Más Goles Anotados</strong>
+                                </div>
+                                <ul class="list-group list-group-numbered">
+                                    {% for equipo in lista_goles_favor %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="ms-2 me-auto">
+                                            {{equipo.equipo.nombre}}
+                                        </div>
+                                        <span class="badge text-bg-primary rounded-pill">{{equipo.goles_favor}}</span>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-sm-4 mb-4">
+                            <div class="card" style="width: 18rem;">
+                                <div class="card-header">
+                                    <strong>Más Goles Recibidos</strong>
+                                </div>
+                                <ul class="list-group list-group-numbered">
+                                    {% for equipo in lista_goles_contra %}
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        <div class="ms-2 me-auto">
+                                            {{equipo.equipo.nombre}}
+                                        </div>
+                                        <span class="badge text-bg-primary rounded-pill">{{equipo.goles_contra}}</span>
+                                    </li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

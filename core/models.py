@@ -66,14 +66,14 @@ class Torneo(models.Model):
         return self.nombre
     
 class Equipo(models.Model):
+    manager = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     nombre = models.CharField(max_length=20)
-    torneos = models.ManyToManyField(Torneo, related_name='equipos')
+    torneo = models.ForeignKey(Torneo, on_delete=models.CASCADE, related_name='equipos')
     
     def __str__(self):
         return self.nombre
 
 class Jugador(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
     nombre = models.CharField(max_length=30)
     apellido_paterno = models.CharField(max_length=30)
     apellido_materno = models.CharField(max_length=30)
@@ -90,7 +90,7 @@ class Jornada(models.Model):
     torneo = models.ForeignKey(Torneo, on_delete=models.CASCADE, related_name='jornadas')
     
     def __str__(self):
-        return self.nombre
+        return self.nombre + " " + self.torneo.nombre
     
 class Partido(models.Model):
     jornada = models.ForeignKey(Jornada, on_delete=models.CASCADE, related_name='partidos')
@@ -110,10 +110,10 @@ class Partido(models.Model):
         if self.jornada and self.equipo_local and self.equipo_visita:
             torneo = self.jornada.torneo
 
-            if torneo not in self.equipo_local.torneos.all():
+            if torneo != self.equipo_local.torneo:
                 raise ValidationError("El equipo local no pertenece al torneo")
 
-            if torneo not in self.equipo_visita.torneos.all():
+            if torneo != self.equipo_visita.torneo:
                 raise ValidationError("El equipo visitante no pertenece al torneo")
     
     def save(self, *args, **kwargs):

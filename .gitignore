@@ -1,0 +1,79 @@
+# =========================
+# ENTORNO VIRTUAL
+# =========================
+venv/
+env/
+ENV/
+.venv/
+
+# =========================
+# PYTHON
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Archivos compilados
+*.so
+
+# =========================
+# DJANGO
+# =========================
+db.sqlite3
+db.sqlite3-journal
+
+# Archivos estáticos recopilados
+staticfiles/
+
+# Media uploads (opcional)
+media/
+
+# =========================
+# VARIABLES DE ENTORNO
+# =========================
+.env
+.env.*
+
+# =========================
+# LOGS
+# =========================
+*.log
+
+# =========================
+# VS CODE / IDEs
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# SISTEMA OPERATIVO
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# PYTEST / COVERAGE
+# =========================
+.pytest_cache/
+.coverage
+htmlcov/
+
+# =========================
+# MIGRACIONES (OPCIONAL)
+# =========================
+# Si trabajas solo puedes ignorarlas,
+# pero normalmente NO se recomienda.
+# */migrations/
+# !*/migrations/__init__.py
+
+# =========================
+# NODE / VITE (si usas frontend)
+# =========================
+node_modules/
+dist/
+
+# =========================
+# ARCHIVOS TEMPORALES
+# =========================
+*.tmp
+*.swp

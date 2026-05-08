@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Torneo, Competencia, Jornada
 
 # Create your views here.
@@ -31,13 +31,13 @@ def competencia(request, competencia_id, torneo_id):
                'lista_goles_favor': lista_goles_favor,
                'lista_goles_contra': lista_goles_contra
                }
-    return render(request, 'competencia.html', context)
+    return render(request, 'core/competencia.html', context)
 
 def tabla_partidos_htmx(request, jornada_id):
     jornada = get_object_or_404(Jornada, id=jornada_id)
     partidos = jornada.partidos.all()
     context = {'partidos':partidos, 'jornada':jornada}
-    return render(request, 'partials/tabla_partidos.html', context)
+    return render(request, 'core/partials/tabla_partidos.html', context)
 
 
 def nosotros(request):

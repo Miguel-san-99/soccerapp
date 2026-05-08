@@ -4,7 +4,7 @@ from .models import Torneo, Competencia, Jornada
 # Create your views here.
 
 def home(request):
-    return render(request, 'index.html')
+    return render(request, 'core/index.html')
 
 def competencia(request, competencia_id, torneo_id):
     competencia = get_object_or_404(Competencia, id=competencia_id)
@@ -41,4 +41,4 @@ def tabla_partidos_htmx(request, jornada_id):
 
 
 def nosotros(request):
-    return render(request, 'nosotros.html')
+    return render(request, 'core/nosotros.html')

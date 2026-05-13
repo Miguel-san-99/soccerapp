@@ -30,3 +30,6 @@ def registrar_equipo(request, competencia_id):
         context = {'form': form}
         
     return render(request, 'administrar/registrar_equipo.html', context)
+
+def home(request):
+    return render(request, 'administrar/index.html')

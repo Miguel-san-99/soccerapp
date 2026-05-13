@@ -16,73 +16,12 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg bg-body-tertiary">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'home' %}">
-                    <img src="{% static 'img/logo.png' %}" alt="Logo" width="100" height=100%
-                        class="d-inline-block align-text-top">
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavDropdown">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Inicio</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Competiciones
-                            </a>
-                            <ul class="dropdown-menu">
-                                {% for competencia in competencias %}
-                                <li><a class="dropdown-item"
-                                        href="{% url 'competencia' competencia_id=competencia.id torneo_id=competencia.torneos.first.id %}">{{competencia.nombre}}</a>
-                                </li>
-                                {% endfor %}
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'nosotros' %}">Quienes somos</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
     </header>
     <main>
         {% block content %}
         {% endblock content %}
     </main>
-    <footer id="footer" class="footer dark-background">
-        <div class="copyright text-center">
-            <div
-                class="container d-flex flex-column flex-lg-row justify-content-center justify-content-lg-between align-items-center">
-
-                <div class="d-flex flex-column align-items-center align-items-lg-start">
-                    <div>
-                        © Copyright <strong><span>2026</span></strong>. All Rights Reserved
-                    </div>
-                    <div class="credits">
-                        Designed by Miguel Sánchez
-                    </div>
-                    <div>
-                        <strong>Ubicación: </strong>
-                        Av. Paseo La Toscana 1001-B, Valle Real, 45019 Zapopan, Jal.
-                    </div>
-                </div>
-
-                <div class="social-links order-first order-lg-last mb-3 mb-lg-0">
-                    <a href="https://www.facebook.com/profile.php?id=100090147656883"><i class="bi bi-facebook"></i></a>
-                    <a href="https://www.instagram.com/derbiasportclub/"><i class="bi bi-instagram"></i></a>
-                    <!-- <a href=""><i class="bi bi-twitter-x"></i></a> -->
-                </div>
-
-            </div>
-        </div>
+    <footer>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"

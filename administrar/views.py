@@ -31,5 +31,11 @@ def registrar_equipo(request, competencia_id):
         
     return render(request, 'administrar/registrar_equipo.html', context)
 
-def home(request):
-    return render(request, 'administrar/index.html')
+def login(request):
+    return render(request, 'administrar/login.html')
+
+def competencia(request):
+    return render(request, 'administrar/competencia.html')
+
+def torneo(request, competencia_id):
+    return render(request, 'administrar/torneo.html')

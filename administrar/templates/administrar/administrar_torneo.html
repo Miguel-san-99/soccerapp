@@ -1,0 +1,128 @@
+{% extends 'administrar/base.html' %}
+
+{% block content %}
+<div class="container">
+    <div class="row py-4 mb-3">
+
+        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{% url 'competencia' %}">Competencia</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'torneo' competencia.id %}">Torneo</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Administrar torneo
+                </li>
+            </ol>
+        </nav>
+
+    </div>
+
+    <div class="row" style="border-radius: 5px;">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" id="nav-equipos-tab" data-bs-toggle="tab" data-bs-target="#nav-equipos"
+                    type="button" role="tab" aria-controls="nav-equipos" aria-selected="true">Equipos</button>
+                <button class="nav-link" id="nav-jornadas-tab" data-bs-toggle="tab" data-bs-target="#nav-jornadas"
+                    type="button" role="tab" aria-controls="nav-jornadas" aria-selected="false">Jornadas</button>
+                <button class="nav-link" id="nav-partidos-tab" data-bs-toggle="tab" data-bs-target="#nav-partidos"
+                    type="button" role="tab" aria-controls="nav-partidos" aria-selected="false">Partidos</button>
+                <button class="nav-link" id="nav-config-tab" data-bs-toggle="tab" data-bs-target="#nav-config"
+                    type="button" role="tab" aria-controls="nav-config" aria-selected="false"
+                    disabled>Configuracion</button>
+            </div>
+        </nav>
+        <div class="tab-content" id="nav-tabContent">
+
+            <!--EQUIPOS-->
+            <div class="tab-pane fade show active" id="nav-equipos" role="tabpanel" aria-labelledby="nav-equipos-tab"
+                tabindex="0">
+                <div class="d-flex justify-content-between align-items-center mt-3">
+                    <h2>Equipos</h2>
+
+                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Agregar
+                    </button>
+                </div>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel"aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Registrar equipo</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{% url 'registrar_equipo' torneo.id %}" method="post">
+
+                                    {% csrf_token %}
+
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-sm-7">
+                                            <div class="form-floating">
+                                                {{ form_equipo.nombre }}
+                                                {{ form_equipo.nombre.label_tag }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row g-3 mb-3">
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                {{ form_equipo.username }}
+                                                {{ form_equipo.username.label_tag }}
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-floating">
+                                                {{ form_equipo.password }}
+                                                {{ form_equipo.password.label_tag }}
+                                            </div>
+                                        </div>
+                                        <div class="col-12">
+                                            <div class="form-floating">
+                                                {{ form_equipo.email }}
+                                                {{ form_equipo.email.label_tag }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-primary">Registrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody class="align-middle">
+                        {% for equipo in equipos %}
+                        <tr>
+                            <td>{{equipo.id}}</td>
+                            <td>{{equipo.nombre}}</td>
+                            <td class="text-center">
+                                <!-- Edit button trigger modal -->
+                                <a class="btn btn-outline-secondary" href="#" role="button">Editar</button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="tab-pane fade" id="nav-jornadas" role="tabpanel" aria-labelledby="nav-jornadas-tab"
+                tabindex="0">Jornadas</div>
+            <div class="tab-pane fade" id="nav-partidos" role="tabpanel" aria-labelledby="nav-partidos-tab"
+                tabindex="0">Partidos</div>
+            <div class="tab-pane fade" id="nav-config" role="tabpanel" aria-labelledby="nav-config-tab" tabindex="0">
+                Configuracion</div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

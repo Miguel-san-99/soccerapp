@@ -17,43 +17,23 @@
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-11 col-sm-8 col-md-6 col-lg-4">
 
-            <h2 class="mb-3">Selecciona un torneo</h2>
+            <h2 class="mb-3">Selecciona un torneo de la competencia <strong>{{competencia.nombre}}</strong></h2>
 
             <p class="text-muted mb-4">
-                Debes seleccionar la competencia y el torneo para continuar.
+                Debes seleccionar el torneo para continuar.
             </p>
 
-            <form id="formSeleccion">
+            <div class="list-group">
 
-                <!-- Competencia -->
-                <div class="mb-3">
-                    <label class="form-label">Competencia</label>
+                {% for torneo in torneos %}
 
-                    <select class="form-select" id="competencia" required>
-                        <option value="">Selecciona una competencia</option>
-                        <option value="liga">Liga</option>
-                        <option value="copa">Copa</option>
-                        <option value="amistoso">Amistoso</option>
-                    </select>
-                </div>
+                <a href="{% url 'administrar_torneo' competencia.id torneo.id %}" class="list-group-item list-group-item-action">
+                    {{ torneo.nombre }}
+                </a>
 
-                <!-- Torneo -->
-                <div class="mb-4">
-                    <label class="form-label">Torneo</label>
+                {% endfor %}
 
-                    <select class="form-select" id="torneo" required>
-                        <option value="">Selecciona un torneo</option>
-                        <option value="clausura2026">Clausura 2026</option>
-                        <option value="apertura2026">Apertura 2026</option>
-                        <option value="juvenil2026">Juvenil 2026</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="btn btn-primary w-100">
-                    Cargar información
-                </button>
-
-            </form>
+            </div>
 
         </div>
     </div>
